@@ -28,6 +28,7 @@ func main() {
  * }
  */
 
+// ListNode ...
 type ListNode struct {
 	Val  int
 	Next *ListNode
@@ -36,18 +37,22 @@ type ListNode struct {
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	var s1 []int
 
-	for l1 != nil {
-		s1 = append(s1, l1.Val)
-		l1 = l1.Next
-	}
-
-	for i := 0; l2 != nil; i++ {
-		if len(s1) > i {
-			s1[i] += l2.Val
-		} else {
-			s1 = append(s1, l2.Val)
+	for i := 0;;i++ {
+		if l1 == nil && l2 == nil {
+			break
 		}
-
+		if l1 == nil {
+			s1 = append(s1, l2.Val)
+			l2 = l2.Next
+			continue
+		}
+		if l2 == nil {
+			s1 = append(s1, l1.Val)
+			l1 = l1.Next
+			continue
+		}
+		s1 = append(s1, l1.Val + l2.Val)
+		l1 = l1.Next
 		l2 = l2.Next
 	}
 
